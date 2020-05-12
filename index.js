@@ -1,7 +1,10 @@
 import fetchMovie from "./apiService.js";
 import Header from "./components/Header.mjs";
 import { fetchNetflixOriginals } from "./apiService.js";
-import DivMovie from "./components/DivMovie.mjs"
+import { fetchTrending } from "./apiService.js";
+import { fetchTopRated } from "./apiService.js";
+import { fetchByGenreMovies } from "./apiService.js";
+// import DivMovie from "./components/DivMovie.mjs"
 
 // (() => {
   //Callback
@@ -42,8 +45,9 @@ import DivMovie from "./components/DivMovie.mjs"
   let netflixOriginals = await fetchNetflixOriginals();
   let container = document.getElementById("movies-container-1");
   let movies = netflixOriginals.results;
+  console.log('pouetpouet',netflixOriginals.results);
 
-  for(let i = 1 ; i < movies.length ; i++){
+  for(let i = 0 ; i < movies.length ; i++){
     let movie = document.createElement('div');
     movie.className = "movies__container--movie__netflix";
     let image = document.createElement('img');
@@ -51,5 +55,119 @@ import DivMovie from "./components/DivMovie.mjs"
     image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
     container.appendChild(movie);
     movie.appendChild(image);
+    if(movies[i].poster_path === null){
+      image.style.display = 'none';
+    }
   }    
+})();
+
+
+// FILMS TENDANCE
+(async() => {
+  let netflixTrending = await fetchTrending();
+  let container = document.getElementById("movies-container-2");
+  let movies = netflixTrending.results;
+
+  for(let i = 0 ; i < movies.length ; i++){
+    let movie = document.createElement('div');
+    movie.className = "movies__container--movie";
+    let image = document.createElement('img');
+    image.className = "movies__container--movie-image";
+    image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+    container.appendChild(movie);
+    movie.appendChild(image);
+    if(movies[i].poster_path === null){
+      image.style.display = 'none';
+    }
+  }    
+})();
+
+
+// FILMS LES MIEUX NOTES
+(async() => {
+  let netflixTopRated = await fetchTopRated();
+  let container = document.getElementById("movies-container-3");
+  let movies = netflixTopRated.results;
+
+  for (let i = 0; i < movies.length; i++) {
+      let movie = document.createElement('div');
+      movie.className = "movies__container--movie";
+      let image = document.createElement('img');
+      image.className = "movies__container--movie-image";
+      image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+      container.appendChild(movie);
+      movie.appendChild(image);
+      if(movies[i].poster_path === null){
+        image.style.display = 'none';
+      }
+  }
+})();
+
+
+// FILMS PAR GENRE
+
+// Code pour obtenir la liste des genres
+// (async() => {
+//   let movie = await fetchByGenre();
+//   console.log(movie)
+// })();
+
+// Films par genre : ACTION
+(async() => {
+  let netflixByGenreAction = await fetchByGenreMovies(28);
+  let container = document.getElementById("movies-container-4");
+  let movies = netflixByGenreAction.results;
+
+  for (let i = 0; i < movies.length; i++) {
+      let movie = document.createElement('div');
+      movie.className = "movies__container--movie";
+      let image = document.createElement('img');
+      image.className = "movies__container--movie-image";
+      image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+      container.appendChild(movie);
+      movie.appendChild(image);
+      if(movies[i].poster_path === null){
+        image.style.display = 'none';
+      }
+  }
+})();
+
+// Films par genre : COMEDY
+(async() => {
+  let netflixByGenreComedy = await fetchByGenreMovies(35);
+  let container = document.getElementById("movies-container-5");
+  let movies = netflixByGenreComedy.results;
+
+  for (let i = 0; i < movies.length; i++) {
+      let movie = document.createElement('div');
+      movie.className = "movies__container--movie";
+      let image = document.createElement('img');
+      image.className = "movies__container--movie-image";
+      image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+      container.appendChild(movie);
+      movie.appendChild(image);
+      if(movies[i].poster_path === null){
+        image.style.display = 'none';
+      }
+  }
+})();
+
+// Films par genre : DOCUMENTARY
+(async() => {
+  let netflixByGenreDocumentary = await fetchByGenreMovies(99);
+  let container = document.getElementById("movies-container-6");
+  let movies = netflixByGenreDocumentary.results;
+
+  for (let i = 0; i < movies.length; i++) {
+      let movie = document.createElement('div');
+      movie.className = "movies__container--movie";
+      let image = document.createElement('img');
+      image.className = "movies__container--movie-image";
+      image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+      container.appendChild(movie);
+      movie.appendChild(image);
+      if(movies[i].poster_path === null){
+        image.style.display = 'none';
+      }
+  }
 })();

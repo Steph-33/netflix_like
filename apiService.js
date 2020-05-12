@@ -44,21 +44,42 @@ export default async function fetchMovie(movieId) {
   const url = `${APÎ_URL}${movieId}?api_key=${API_KEY}`;
   let res = await fetch(url);
   let movie = await res.json();
-  console.log(movie);
   return movie;
 }
 
 export async function fetchNetflixOriginals() {
-  console.log('hello')
   const url = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_networks=213`;
   let res = await fetch(url);
   let netflixOriginals = await res.json();
-  console.log(netflixOriginals)
   return netflixOriginals;
 }
 
-export function fetchTrending() {}
+export async function fetchTrending() {
+  const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
+  let res = await fetch(url);
+  let netflixTrending = await res.json();
+  return netflixTrending;
+}
 
-export function fetchTopRated() {}
+export async function fetchTopRated() {
+  const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
+  let res = await fetch(url);
+  let netflixToprated = await res.json();
+  return netflixToprated;
+}
 
-export function fetchByGenreMovies(genre) {}
+export async function fetchByGenreMovies(genre) {
+  const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genre}`;
+  let res = await fetch(url);
+  let netflixByGenre = await res.json();
+  return netflixByGenre;
+}
+
+// URL pour récupérer la liste des genres de films
+// export async function fetchByGenre() {
+//   const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`;
+//   let res = await fetch(url);
+//   let netflix = await res.json();
+//   console.log(netflix)
+//   return netflix;
+// }

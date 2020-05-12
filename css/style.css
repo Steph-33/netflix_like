@@ -150,9 +150,13 @@ html {
   background-color: #111111;
   color: #fff;
   padding: 0 4rem; }
-  #movies-container-1{
+  #movies-container-1, 
+  #movies-container-2, 
+  #movies-container-3, 
+  #movies-container-4,
+  #movies-container-5, 
+  #movies-container-6{
     display: flex;
-    flex-direction: row;
   }
   .movies__heading {
     padding-top: 2rem; }
