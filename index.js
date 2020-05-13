@@ -5,6 +5,7 @@ import { fetchNetflixOriginals } from "./apiService.js";
 import { fetchTrending } from "./apiService.js";
 import { fetchTopRated } from "./apiService.js";
 import { fetchByGenreMovies } from "./apiService.js";
+import { fetchNetflixDescription } from "./apiService.js"
 // import DivMovie from "./components/DivMovie.mjs"
 
 // (() => {
@@ -45,7 +46,7 @@ import { fetchByGenreMovies } from "./apiService.js";
   let netflixOriginals = await fetchNetflixOriginals();
   let container = document.getElementById("movies-container-1");
   let movies = netflixOriginals.results;
-  let modal = document.getElementById('js-modal-click');
+  let subHeader = document.getElementById('modaleNetflixOriginals');
 
   for(let i = 0 ; i < movies.length ; i++){
     let movie = document.createElement('div');
@@ -53,17 +54,32 @@ import { fetchByGenreMovies } from "./apiService.js";
     let image = document.createElement('img');
     image.className = "movies__container--movie-image";
     image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+    let id = movies[i].id;
+
+    (async() => {
+      let movieName = await fetchNetflixDescription(id);
     
-    image.addEventListener('click', (event) => {
-      event.preventDefault();
-      container.innerHTML = Modale(movies[i]);      
-      container.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${movies[i].poster_path})`;
-    });
-    container.appendChild(movie);
-    movie.appendChild(image);
-    if(movies[i].poster_path === null){
-      image.style.display = 'none';
-    }
+      image.addEventListener('click', (event) => {
+        event.preventDefault();
+        subHeader.innerHTML = Modale(movieName);      
+        subHeader.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${movieName.backdrop_path})`;
+        subHeader.style.backgroundRepeat = 'no-repeat';
+        subHeader.style.backgroundPositionX = 'right';
+        subHeader.style.backgroundSize = '40%';
+        let button = subHeader.querySelector('.modaleButton');
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          let modale = subHeader.querySelector('#modale');
+          subHeader.removeChild(modale)
+          subHeader.style.backgroundImage = null;
+        });
+      });
+      container.appendChild(movie);
+      movie.appendChild(image);
+      if(movies[i].poster_path === null){
+        image.style.display = 'none';
+      }
+    })();
   }    
 })();
 
@@ -73,6 +89,7 @@ import { fetchByGenreMovies } from "./apiService.js";
   let netflixTrending = await fetchTrending();
   let container = document.getElementById("movies-container-2");
   let movies = netflixTrending.results;
+  let subHeader = document.getElementById('modaleTrendingNow');
 
   for(let i = 0 ; i < movies.length ; i++){
     let movie = document.createElement('div');
@@ -80,11 +97,33 @@ import { fetchByGenreMovies } from "./apiService.js";
     let image = document.createElement('img');
     image.className = "movies__container--movie-image";
     image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
-    container.appendChild(movie);
-    movie.appendChild(image);
-    if(movies[i].poster_path === null){
-      image.style.display = 'none';
-    }
+    let id = movies[i].id;
+
+    (async() => {
+      let movieName = await fetchNetflixDescription(id);
+    
+      image.addEventListener('click', (event) => {
+        event.preventDefault();
+        subHeader.innerHTML = Modale(movieName);      
+        subHeader.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${movieName.backdrop_path})`;
+        subHeader.style.backgroundRepeat = 'no-repeat';
+        subHeader.style.backgroundPositionX = 'right';
+        subHeader.style.backgroundSize = '40%';
+        let button = subHeader.querySelector('.modaleButton');
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          let modale = subHeader.querySelector('#modale');
+          subHeader.removeChild(modale)
+          subHeader.style.backgroundImage = null;
+        });
+      });
+
+      container.appendChild(movie);
+      movie.appendChild(image);
+      if(movies[i].poster_path === null){
+        image.style.display = 'none';
+      }
+    })();
   }    
 })();
 

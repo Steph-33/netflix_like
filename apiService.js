@@ -54,6 +54,13 @@ export async function fetchNetflixOriginals() {
   return netflixOriginals;
 }
 
+export async function fetchNetflixDescription(movieId) {
+  const url = `https://api.themoviedb.org/3/tv/${movieId}?api_key=${API_KEY}`;
+  let res = await fetch(url);
+  let movie = await res.json();
+  return movie;
+}
+
 export async function fetchTrending() {
   const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
   let res = await fetch(url);

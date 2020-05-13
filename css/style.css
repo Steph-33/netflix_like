@@ -238,6 +238,10 @@ html {
           .movies__container--movie__netflix {
             height: 34rem; } }
 
+#modale{
+  padding-left: 45px;
+}
+
 .modaleTitle{
   color: white;
   font-size: 250%;
@@ -259,11 +263,15 @@ html {
 
 .modaleDescription{
   padding-top: 8px;
-  padding-bottom: 50px;
   font-size: 120%;
   color: white;
   width : 50%;
   text-align: justify;
+}
+
+.modaleButton{
+  margin-top: 8px;
+  margin-bottom: 150px;
 }
 
 #modaleContainer{
