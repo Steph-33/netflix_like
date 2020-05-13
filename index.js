@@ -1,6 +1,7 @@
 import fetchMovie from "./apiService.js";
 import Header from "./components/Header.mjs";
-import { Modale } from "./components/Modale.mjs";
+import { ModaleSeries } from "./components/Modales.mjs";
+import { ModaleMovies } from "./components/Modales.mjs";
 import { fetchNetflixOriginals } from "./apiService.js";
 import { fetchTrending } from "./apiService.js";
 import { fetchTopRated } from "./apiService.js";
@@ -45,8 +46,8 @@ import { fetchNetflixDescription } from "./apiService.js"
 (async() => {
   let netflixOriginals = await fetchNetflixOriginals();
   let container = document.getElementById("movies-container-1");
+  console.log(netflixOriginals);
   let movies = netflixOriginals.results;
-  let subHeader = document.getElementById('modaleNetflixOriginals');
 
   for(let i = 0 ; i < movies.length ; i++){
     let movie = document.createElement('div');
@@ -55,31 +56,31 @@ import { fetchNetflixDescription } from "./apiService.js"
     image.className = "movies__container--movie-image";
     image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
     let id = movies[i].id;
+    container.appendChild(movie);
+    movie.appendChild(image);
+    if(movies[i].poster_path === null){
+      image.style.display = 'none';
+    }
 
-    (async() => {
-      let movieName = await fetchNetflixDescription(id);
+    let movieName = await fetchNetflixDescription(id);
     
-      image.addEventListener('click', (event) => {
+    image.addEventListener('click', (event) => {
+      event.preventDefault();
+      let modaleNetflixOriginals = document.createElement('div');
+      modaleNetflixOriginals.id = 'modaleNetflixOriginals';
+      document.body.appendChild(modaleNetflixOriginals);
+
+      modaleNetflixOriginals.innerHTML = ModaleSeries(movieName);      
+      modaleNetflixOriginals.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${movieName.backdrop_path})`;
+      modaleNetflixOriginals.style.backgroundSize = 'cover';
+      let button = modaleNetflixOriginals.querySelector('.modaleButton');
+      button.addEventListener('click', (event) => {
         event.preventDefault();
-        subHeader.innerHTML = Modale(movieName);      
-        subHeader.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${movieName.backdrop_path})`;
-        subHeader.style.backgroundRepeat = 'no-repeat';
-        subHeader.style.backgroundPositionX = 'right';
-        subHeader.style.backgroundSize = '40%';
-        let button = subHeader.querySelector('.modaleButton');
-        button.addEventListener('click', (event) => {
-          event.preventDefault();
-          let modale = subHeader.querySelector('#modale');
-          subHeader.removeChild(modale)
-          subHeader.style.backgroundImage = null;
-        });
+        let modale = modaleNetflixOriginals.querySelector('#modale');
+        modaleNetflixOriginals.removeChild(modale)
+        modaleNetflixOriginals.remove('backgroundImage');
       });
-      container.appendChild(movie);
-      movie.appendChild(image);
-      if(movies[i].poster_path === null){
-        image.style.display = 'none';
-      }
-    })();
+    });
   }    
 })();
 
@@ -89,7 +90,6 @@ import { fetchNetflixDescription } from "./apiService.js"
   let netflixTrending = await fetchTrending();
   let container = document.getElementById("movies-container-2");
   let movies = netflixTrending.results;
-  let subHeader = document.getElementById('modaleTrendingNow');
 
   for(let i = 0 ; i < movies.length ; i++){
     let movie = document.createElement('div');
@@ -98,32 +98,31 @@ import { fetchNetflixDescription } from "./apiService.js"
     image.className = "movies__container--movie-image";
     image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
     let id = movies[i].id;
-
-    (async() => {
-      let movieName = await fetchNetflixDescription(id);
+    container.appendChild(movie);
+    movie.appendChild(image);
+    if(movies[i].poster_path === null){
+      image.style.display = 'none';
+    }
     
-      image.addEventListener('click', (event) => {
-        event.preventDefault();
-        subHeader.innerHTML = Modale(movieName);      
-        subHeader.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${movieName.backdrop_path})`;
-        subHeader.style.backgroundRepeat = 'no-repeat';
-        subHeader.style.backgroundPositionX = 'right';
-        subHeader.style.backgroundSize = '40%';
-        let button = subHeader.querySelector('.modaleButton');
-        button.addEventListener('click', (event) => {
-          event.preventDefault();
-          let modale = subHeader.querySelector('#modale');
-          subHeader.removeChild(modale)
-          subHeader.style.backgroundImage = null;
-        });
-      });
+    let movieName = await fetchMovie(id);
+    
+    image.addEventListener('click', (event) => {
+      event.preventDefault();
+      let modaleTrendingNow = document.createElement('div');
+      modaleTrendingNow.id = 'modaleTrendingNow';
+      document.body.appendChild(modaleTrendingNow);
 
-      container.appendChild(movie);
-      movie.appendChild(image);
-      if(movies[i].poster_path === null){
-        image.style.display = 'none';
-      }
-    })();
+      modaleTrendingNow.innerHTML = ModaleMovies(movieName);      
+      modaleTrendingNow.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${movieName.backdrop_path})`;
+      modaleTrendingNow.style.backgroundSize = 'cover';
+      let button = modaleTrendingNow.querySelector('.modaleButton');
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        let modale = modaleTrendingNow.querySelector('#modale');
+        modaleTrendingNow.removeChild(modale)
+        modaleTrendingNow.remove('backgroundImage');
+      });
+    });
   }    
 })();
 
@@ -140,11 +139,32 @@ import { fetchNetflixDescription } from "./apiService.js"
       let image = document.createElement('img');
       image.className = "movies__container--movie-image";
       image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+      let id = movies[i].id;
       container.appendChild(movie);
       movie.appendChild(image);
       if(movies[i].poster_path === null){
         image.style.display = 'none';
-      }
+      }  
+      
+      let movieName = await fetchMovie(id);
+      
+      image.addEventListener('click', (event) => {
+        event.preventDefault();
+        let modaleTopRated = document.createElement('div');
+        modaleTopRated.id = 'modaleTopRated';
+        document.body.appendChild(modaleTopRated);
+
+        modaleTopRated.innerHTML = ModaleMovies(movieName);      
+        modaleTopRated.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${movieName.backdrop_path})`;
+        modaleTopRated.style.backgroundSize = 'cover';
+        let button = modaleTopRated.querySelector('.modaleButton');
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          let modale = modaleTopRated.querySelector('#modale');
+          modaleTopRated.removeChild(modale)
+          modaleTopRated.remove('backgroundImage');
+        });
+      });
   }
 })();
 
@@ -169,11 +189,32 @@ import { fetchNetflixDescription } from "./apiService.js"
       let image = document.createElement('img');
       image.className = "movies__container--movie-image";
       image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+      let id = movies[i].id;
       container.appendChild(movie);
       movie.appendChild(image);
       if(movies[i].poster_path === null){
         image.style.display = 'none';
       }
+
+      let movieName = await fetchMovie(id);
+      
+      image.addEventListener('click', (event) => {
+        event.preventDefault();
+        let modaleActionMovies = document.createElement('div');
+        modaleActionMovies.id = 'modaleActionMovies';
+        document.body.appendChild(modaleActionMovies);
+
+        modaleActionMovies.innerHTML = ModaleMovies(movieName);      
+        modaleActionMovies.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${movieName.backdrop_path})`;
+        modaleActionMovies.style.backgroundSize = 'cover';
+        let button = modaleActionMovies.querySelector('.modaleButton');
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          let modale = modaleActionMovies.querySelector('#modale');
+          modaleActionMovies.removeChild(modale)
+          modaleActionMovies.remove('backgroundImage');
+        });
+      });
   }
 })();
 
@@ -189,11 +230,32 @@ import { fetchNetflixDescription } from "./apiService.js"
       let image = document.createElement('img');
       image.className = "movies__container--movie-image";
       image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+      let id = movies[i].id;
       container.appendChild(movie);
       movie.appendChild(image);
       if(movies[i].poster_path === null){
         image.style.display = 'none';
       }
+
+      let movieName = await fetchMovie(id);
+      
+      image.addEventListener('click', (event) => {
+        event.preventDefault();
+        let modaleComedies = document.createElement('div');
+        modaleComedies.id = 'modaleComedies';
+        document.body.appendChild(modaleComedies);
+
+        modaleComedies.innerHTML = ModaleMovies(movieName);      
+        modaleComedies.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${movieName.backdrop_path})`;
+        modaleComedies.style.backgroundSize = 'cover';
+        let button = modaleComedies.querySelector('.modaleButton');
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          let modale = modaleComedies.querySelector('#modale');
+          modaleComedies.removeChild(modale)
+          modaleComedies.remove('backgroundImage');
+        });
+      });
   }
 })();
 
@@ -209,10 +271,31 @@ import { fetchNetflixDescription } from "./apiService.js"
       let image = document.createElement('img');
       image.className = "movies__container--movie-image";
       image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+      let id = movies[i].id;
       container.appendChild(movie);
       movie.appendChild(image);
       if(movies[i].poster_path === null){
         image.style.display = 'none';
       }
+
+      let movieName = await fetchMovie(id);
+      
+      image.addEventListener('click', (event) => {
+        event.preventDefault();
+        let modaleDocumentaries = document.createElement('div');
+        modaleDocumentaries.id = 'modaleDocumentaries';
+        document.body.appendChild(modaleDocumentaries);
+
+        modaleDocumentaries.innerHTML = ModaleMovies(movieName);      
+        modaleDocumentaries.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${movieName.backdrop_path})`;
+        modaleDocumentaries.style.backgroundSize = 'cover';
+        let button = modaleDocumentaries.querySelector('.modaleButton');
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          let modale = modaleDocumentaries.querySelector('#modale');
+          modaleDocumentaries.removeChild(modale)
+          modaleDocumentaries.remove('backgroundImage');
+        });
+      });
   }
 })();
