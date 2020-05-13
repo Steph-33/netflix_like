@@ -9,7 +9,9 @@ export function ModaleSeries(props) {
                 <h2 class="modaleEpisode">Nombre d'épisodes : ${props.number_of_episodes}   Nombre de saisons : ${props.number_of_seasons }</h2>
             </div>
             <p class="modaleDescription">${props.overview}</p>
-            <button type="button" class="modaleButton">Close</button>
+            <button type="button" class="modaleButton">&#10005;</button>
+            <button class="modaleButtonPlay">&#8227; PLAY</button>
+            <button class="modaleButtonMyList">&#43; MY LIST</button>
         </div>    
     </div>`;
 }
@@ -24,7 +26,9 @@ export function ModaleMovies(props) {
                 <h2 class="modaleDate">Release Date : ${props.release_date || props.first_air_date}</h2>
             </div>
             <p class="modaleDescription">${props.overview}</p>
-            <button type="button" class="modaleButton">Close</button>
+            <button type="button" class="modaleButton">&#10005;</button>
+            <button class="modaleButtonPlay">&#8227; PLAY</button>
+            <button class="modaleButtonMyList">&#43; MY LIST</button>
         </div>    
     </div>`;
 }
