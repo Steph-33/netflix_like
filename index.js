@@ -9,6 +9,14 @@ import { fetchByGenreMovies } from "./apiService.js";
 import { fetchNetflixDescription } from "./apiService.js";
 import { displayRechercheMovie } from "./input.js";
 
+
+// APPEL DE LA FONCTION displayRechercheMovie IMPORTEE DE input.js POUR LA RECHERCHE D'UN FILM
+// PAR SON NOM DANS LA BARRE DE RECHERCHE ///////////////////////////////////////////////////
+displayRechercheMovie();
+
+
+// DIFFERENTES METHODES POUR RECUPERER LES INFOS POUR LE HEADER /////////////////////////////
+
 // (() => {
   //Callback
 //   const getResponse = (data) => {
@@ -43,6 +51,7 @@ import { displayRechercheMovie } from "./input.js";
     document.getElementById("header").style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`;
 })();
 
+// SERIES NETFLIX ORIGINALS ////////////////////////////////////////////////////////////////
 (async() => {
   let netflixOriginals = await fetchNetflixOriginals();
   let container = document.getElementById("movies-container-1");
@@ -83,8 +92,7 @@ import { displayRechercheMovie } from "./input.js";
   }    
 })();
 
-
-// FILMS TENDANCE
+// FILMS TENDANCE ////////////////////////////////////////////////////////////////////////
 (async() => {
   let netflixTrending = await fetchTrending();
   let container = document.getElementById("movies-container-2");
@@ -125,8 +133,7 @@ import { displayRechercheMovie } from "./input.js";
   }    
 })();
 
-
-// FILMS LES MIEUX NOTES
+// FILMS LES MIEUX NOTES //////////////////////////////////////////////////////////////
 (async() => {
   let netflixTopRated = await fetchTopRated();
   let container = document.getElementById("movies-container-3");
@@ -168,15 +175,9 @@ import { displayRechercheMovie } from "./input.js";
 })();
 
 
-// FILMS PAR GENRE
+// FILMS PAR GENRE ////////////////////////////////////////////////////////////////////
 
-// Code pour obtenir la liste des genres
-// (async() => {
-//   let movie = await fetchByGenre();
-//   console.log(movie)
-// })();
-
-// Films par genre : ACTION
+// Films par genre : ACTION //////////////////////////////////////////////////////////
 (async() => {
   let netflixByGenreAction = await fetchByGenreMovies(28);
   let container = document.getElementById("movies-container-4");
@@ -217,7 +218,7 @@ import { displayRechercheMovie } from "./input.js";
   }
 })();
 
-// Films par genre : COMEDY
+// Films par genre : COMEDY /////////////////////////////////////////////////////////////
 (async() => {
   let netflixByGenreComedy = await fetchByGenreMovies(35);
   let container = document.getElementById("movies-container-5");
@@ -258,7 +259,7 @@ import { displayRechercheMovie } from "./input.js";
   }
 })();
 
-// Films par genre : DOCUMENTARY
+// Films par genre : DOCUMENTARY ///////////////////////////////////////////////////////
 (async() => {
   let netflixByGenreDocumentary = await fetchByGenreMovies(99);
   let container = document.getElementById("movies-container-6");
@@ -298,5 +299,3 @@ import { displayRechercheMovie } from "./input.js";
       });
   }
 })();
-
-displayRechercheMovie();
