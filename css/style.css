@@ -144,7 +144,11 @@ html {
   background-color: #111111;
   min-height: 100%;
   padding-bottom: 4rem;
-  padding-left: 4rem; }
+  padding-left: 4rem; 
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 7rem;
+}
 
 .movies {
   background-color: #111111;
@@ -159,6 +163,7 @@ html {
     display: flex;
     overflow-x: scroll;
   }
+  
   .movies__heading {
     padding-top: 2rem; }
   .movies__container::-webkit-scrollbar {

@@ -6,8 +6,8 @@ import { fetchNetflixOriginals } from "./apiService.js";
 import { fetchTrending } from "./apiService.js";
 import { fetchTopRated } from "./apiService.js";
 import { fetchByGenreMovies } from "./apiService.js";
-import { fetchNetflixDescription } from "./apiService.js"
-// import DivMovie from "./components/DivMovie.mjs"
+import { fetchNetflixDescription } from "./apiService.js";
+import { displayRechercheMovie } from "./input.js";
 
 // (() => {
   //Callback
@@ -46,7 +46,6 @@ import { fetchNetflixDescription } from "./apiService.js"
 (async() => {
   let netflixOriginals = await fetchNetflixOriginals();
   let container = document.getElementById("movies-container-1");
-  console.log(netflixOriginals);
   let movies = netflixOriginals.results;
 
   for(let i = 0 ; i < movies.length ; i++){
@@ -96,11 +95,11 @@ import { fetchNetflixDescription } from "./apiService.js"
     movie.className = "movies__container--movie";
     let image = document.createElement('img');
     image.className = "movies__container--movie-image";
-    image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+    image.src = `https://image.tmdb.org/t/p/original/${movies[i].backdrop_path}`;
     let id = movies[i].id;
     container.appendChild(movie);
     movie.appendChild(image);
-    if(movies[i].poster_path === null){
+    if(movies[i].backdrop_path === null){
       image.style.display = 'none';
     }
     
@@ -138,11 +137,11 @@ import { fetchNetflixDescription } from "./apiService.js"
       movie.className = "movies__container--movie";
       let image = document.createElement('img');
       image.className = "movies__container--movie-image";
-      image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+      image.src = `https://image.tmdb.org/t/p/original/${movies[i].backdrop_path}`;
       let id = movies[i].id;
       container.appendChild(movie);
       movie.appendChild(image);
-      if(movies[i].poster_path === null){
+      if(movies[i].backdrop_path === null){
         image.style.display = 'none';
       }  
       
@@ -188,11 +187,11 @@ import { fetchNetflixDescription } from "./apiService.js"
       movie.className = "movies__container--movie";
       let image = document.createElement('img');
       image.className = "movies__container--movie-image";
-      image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+      image.src = `https://image.tmdb.org/t/p/original/${movies[i].backdrop_path}`;
       let id = movies[i].id;
       container.appendChild(movie);
       movie.appendChild(image);
-      if(movies[i].poster_path === null){
+      if(movies[i].backdrop_path === null){
         image.style.display = 'none';
       }
 
@@ -229,11 +228,11 @@ import { fetchNetflixDescription } from "./apiService.js"
       movie.className = "movies__container--movie";
       let image = document.createElement('img');
       image.className = "movies__container--movie-image";
-      image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+      image.src = `https://image.tmdb.org/t/p/original/${movies[i].backdrop_path}`;
       let id = movies[i].id;
       container.appendChild(movie);
       movie.appendChild(image);
-      if(movies[i].poster_path === null){
+      if(movies[i].backdrop_path === null){
         image.style.display = 'none';
       }
 
@@ -270,11 +269,11 @@ import { fetchNetflixDescription } from "./apiService.js"
       movie.className = "movies__container--movie";
       let image = document.createElement('img');
       image.className = "movies__container--movie-image";
-      image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
+      image.src = `https://image.tmdb.org/t/p/original/${movies[i].backdrop_path}`;
       let id = movies[i].id;
       container.appendChild(movie);
       movie.appendChild(image);
-      if(movies[i].poster_path === null){
+      if(movies[i].backdrop_path === null){
         image.style.display = 'none';
       }
 
@@ -299,3 +298,5 @@ import { fetchNetflixDescription } from "./apiService.js"
       });
   }
 })();
+
+displayRechercheMovie();

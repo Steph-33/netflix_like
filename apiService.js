@@ -82,11 +82,9 @@ export async function fetchByGenreMovies(genre) {
   return netflixByGenre;
 }
 
-// URL pour récupérer la liste des genres de films
-// export async function fetchByGenre() {
-//   const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`;
-//   let res = await fetch(url);
-//   let netflix = await res.json();
-//   console.log(netflix)
-//   return netflix;
-// }
+export async function fetchListMovie(search) {
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${search}`;
+  let res = await fetch(url);
+  let netflixListMovie = await res.json();
+  return netflixListMovie;
+}
