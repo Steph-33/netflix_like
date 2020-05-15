@@ -64,7 +64,7 @@ displayRechercheMovie();
     image.className = "movies__container--movie-image";
     image.src = `https://image.tmdb.org/t/p/original/${movies[i].poster_path}`;
     if(movies[i].poster_path === null){
-      image.src = './img/Logo Netflix.jpg';
+      image.src = './img/Logo_Netflix.jpg';
     }
     let id = movies[i].id;
     container.appendChild(movie);
@@ -105,7 +105,7 @@ displayRechercheMovie();
     image.className = "movies__container--movie-image";
     image.src = `https://image.tmdb.org/t/p/original/${movies[i].backdrop_path}`;
     if(movies[i].backdrop_path === null){
-      image.src = './img/Logo Netflix.jpg';
+      image.src = './img/Logo_Netflix.jpg';
     }
     let id = movies[i].id;
     container.appendChild(movie);
@@ -149,7 +149,7 @@ displayRechercheMovie();
       container.appendChild(movie);
       movie.appendChild(image);
       if(movies[i].backdrop_path === null){
-        image.src = './img/Logo Netflix.jpg';
+        image.src = './img/Logo_Netflix.jpg';
       }
       
       let movieName = await fetchMovie(id);
@@ -193,7 +193,7 @@ displayRechercheMovie();
       container.appendChild(movie);
       movie.appendChild(image);
       if(movies[i].backdrop_path === null){
-        image.src = './img/Logo Netflix.jpg';
+        image.src = './img/Logo_Netflix.jpg';
       }
 
       let movieName = await fetchMovie(id);
@@ -234,7 +234,7 @@ displayRechercheMovie();
       container.appendChild(movie);
       movie.appendChild(image);
       if(movies[i].backdrop_path === null){
-        image.src = './img/Logo Netflix.jpg';
+        image.src = './img/Logo_Netflix.jpg';
       }
 
       let movieName = await fetchMovie(id);
@@ -275,7 +275,7 @@ displayRechercheMovie();
       container.appendChild(movie);
       movie.appendChild(image);
       if(movies[i].backdrop_path === null){
-        image.src = './img/Logo Netflix.jpg';
+        image.src = './img/Logo_Netflix.jpg';
       }
 
       let movieName = await fetchMovie(id);

@@ -19,7 +19,7 @@ export async function displayRechercheMovie(){
                 image.className = "movies__container--movie-image";
                 image.src = `https://image.tmdb.org/t/p/original/${movieResult[i].poster_path}`;
                 if(movieResult[i].poster_path === null){
-                    image.src = './img/Icone Netflix.jpg';
+                    image.src = './img/Logo_Netflix_Poster.jpg';
                 };
                 divSearch.appendChild(movie);
                 movie.appendChild(image);
