@@ -18,11 +18,12 @@ export async function displayRechercheMovie(){
                 let image = document.createElement('img');
                 image.className = "movies__container--movie-image";
                 image.src = `https://image.tmdb.org/t/p/original/${movieResult[i].poster_path}`;
+                if(movieResult[i].poster_path === null){
+                    image.src = './img/Icone Netflix.jpg';
+                };
                 divSearch.appendChild(movie);
                 movie.appendChild(image);
-                if (movieResult[i].poster_path === null) {
-                    image.style.display = 'none';
-                }
+                
             }
             container.style.display = 'none';
         }else{
