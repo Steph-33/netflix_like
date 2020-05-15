@@ -14,7 +14,7 @@ export async function displayRechercheMovie(){
         if(searchString.length >= 1){
             for (let i = 0; i < movieResult.length; i++) {
                 let movie = document.createElement('div');
-                movie.className = "movies__container--movie";
+                movie.className = "movies__container--movie-search";
                 let image = document.createElement('img');
                 image.className = "movies__container--movie-image";
                 image.src = `https://image.tmdb.org/t/p/original/${movieResult[i].poster_path}`;

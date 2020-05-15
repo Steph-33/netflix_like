@@ -355,4 +355,19 @@ html {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+.movies__container--movie-search {
+  min-height: 0;
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+  padding-right: 1.3rem;
+  height: 35rem;
+  cursor: pointer;
+  transition: all 450ms;
+  transform: center left;
+}
+
+.movies__container--movie-search:hover {
+  transform: scale(1.1);
+}
+
 /*# sourceMappingURL=style.css.map */
