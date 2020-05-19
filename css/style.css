@@ -243,18 +243,14 @@ html {
           .movies__container--movie__netflix {
             height: 34rem; } }
 
-#modaleNetflixOriginals, 
-#modaleTrendingNow, 
-#modaleTopRated, 
-#modaleActionMovies, 
-#modaleComedies,
-#modaleDocumentaries{
+.modale_container{
   position: fixed;
   bottom: 0;
   left: 0;
   height: 60vh;
   z-index: 100;
   width: 100%;
+  display:none;
 }
 
 #modale {
